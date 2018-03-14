@@ -1,6 +1,6 @@
 ## The Træfik Quickstart (Using Docker)
 
-### 1 -- Launch Træfik and Tell It to Listen to Docker
+### 1 — Launch Træfik and Tell It to Listen to Docker
 
 In this quickstart, we'll use [Docker compose](https://docs.docker.com/compose) to create our demo infrastructure.
 
@@ -35,7 +35,7 @@ docker-compose -f traefik-docker-compose.yml up -d
 
 Open [http://localhost:8080](http://localhost:8080) in a browser to see Træfik's dashboard (we'll go back there once we'll have launched a service in step 2).
 
-## 2 -- Launch a Service and See How Træfik Detects It and Creates a Route for You 
+## 2 — Launch a Service and See How Træfik Detects It and Creates a Route for You 
 
 Now that we have a Træfik instance up and running, we will deploy new services. 
 
@@ -83,7 +83,7 @@ X-Forwarded-Proto: http
 X-Forwarded-Server: dbb60406010d
 ```
 
-## 3 -- Launch More Instances of your Services to Play With Traefik's Load Balancing Capabilities
+## 3 — Launch More Instances of your Services to Play With Traefik's Load Balancing Capabilities
 
 In the `traefik-quickstart` folder, run the following command to start more instances of your `whoami` services:
  
