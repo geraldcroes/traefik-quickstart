@@ -15,17 +15,11 @@ services:
   reverse-proxy:
     image: traefik #the official traefik docker image
     command: --api --docker --logLevel=DEBUG
-    networks:
-      - webgateway
     ports:
       - "80:80"
       - "8080:8080"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-
-networks:
-  webgateway:
-    driver: bridge
 ```
 
 A bit of explanations on the command line :
@@ -53,14 +47,8 @@ version: '3'
 services:
  whoami:
    image: emilevauge/whoami #A container that exposes an API to show it's IP address
-   networks:
-     - traefik_webgateway
    labels:
      - "traefik.frontend.rule=Host:whoami.docker.localhost"
-
-networks:
- traefik_webgateway:
-   external: true
 ```
 
 In the `traefik-quickstart/services` folder, run the following command to start your new container:
