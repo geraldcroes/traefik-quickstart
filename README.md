@@ -71,7 +71,7 @@ Go back to your browser ([http://localhost:8080](http://localhost:8080)) and see
 Now that Traefik has detected the service, a route is available and you can call your service! (Here, we're using curl)
 
 ```shell
-curl -H Host:whoami.docker.localhost http://127.0.0.1
+curl -H Host:whoami.docker.localhost http://127.0.0.1?hostedononly
 ```
 
 _Shows the following output:_
