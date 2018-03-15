@@ -4,7 +4,7 @@ In this quickstart, we'll use [Docker compose](https://docs.docker.com/compose) 
 
 To save you some time, you can checkout the quickstart from the [containous/traefik-quickstart](https://github.com/containous/traefik-quickstart) repository and read along.
 
-### 1 — Launch Træfik and Tell It to Listen to Docker
+### 1 — Launch Træfik — Tell It to Listen to Docker
 
 First, create the `traefik-quickstart/traefik` folder. In this folder, we will create a `docker-compose.yml` file where we will define a service `reverse-proxy` that uses the official Træfik image.
 
@@ -37,7 +37,7 @@ docker-compose -f traefik/docker-compose.yml up -d
 
 If you'd like, you can open a browser and go to [http://localhost:8080](http://localhost:8080) to see Træfik's dashboard (we'll go back there once we'll have launched a service in step 2).
 
-## 2 — Launch a Service and See How Træfik Detects It and Creates a Route for You 
+## 2 — Launch a Service — Træfik Detects It and Creates a Route for You 
 
 Now that we have a Træfik instance up and running, we will deploy new services. 
 
@@ -79,7 +79,7 @@ _Shows the following output:_
 I'm hosted on ef194d07634a
 ```
 
-## 3 — Launch More Instances of your Services to Play With Traefik's Load Balancing Capabilities
+## 3 — Launch More Instances — Traefik Load Balances Them
 
 In the `traefik-quickstart` folder, run the following command to start more instances of your `whoami` services:
  
@@ -105,7 +105,7 @@ I'm hosted on ef194d07634a
 I'm hosted on 6c3c5df0c79a
 ```
 
-## 4 — Enjoy the Magic
+## 4 — Enjoy Træfik's Magic
 
 Now that you have a basic understanding of how Træfik can automatically create the routes to your services and load balance them, it might be time to dive into [the documentation](https://docs.traefik.io/) and let Træfik work for you! Whatever your infrastructure is, there is probably [an available Træfik backend](https://docs.traefik.io/configuration/backends/available) that will do the job. 
 
