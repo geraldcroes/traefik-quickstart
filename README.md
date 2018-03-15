@@ -15,17 +15,13 @@ version: '3'
 services:
   reverse-proxy:
     image: traefik #The official Traefik docker image
-    command: --api --docker
+    command: --api --docker #enables the web UI and tells Træfik to listen to docker
     ports:
       - "80:80"     #The HTTP port
-      - "8080:8080" #The Web UI
+      - "8080:8080" #The Web UI (enabled by --api)
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock #So that Traefik can listen to the Docker events
 ```
-
-A bit of explanations on the command line :
-- `--api` enables the Web UI
-- `--docker` tells Træfik to listens to Docker (so that Træfik can automatically adapt its configuration)
 
 **That's it. Now you can launch Træfik!**
 
@@ -53,7 +49,7 @@ services:
     labels:
       - "traefik.frontend.rule=Host:whoami.docker.localhost"
 
-#we're deploying the services on the same network so that the containers can talk to each other
+#We're deploying the services on the same network so that the containers can talk to each other
 networks: 
    default: 
       external:
@@ -71,12 +67,14 @@ Go back to your browser ([http://localhost:8080](http://localhost:8080)) and see
 Now that Traefik has detected the service, a route is available and you can call your service! (Here, we're using curl)
 
 ```shell
-curl -H Host:whoami.docker.localhost http://127.0.0.1?hostedononly
+curl -H Host:whoami.docker.localhost http://127.0.0.1
 ```
 
 _Shows the following output:_
 ```yaml
-I'm hosted on ef194d07634a
+Hostname: 8656c8ddca6c
+IP: 172.27.0.3
+#...
 ```
 
 ### 3 — Launch More Instances — Traefik Load Balances Them
@@ -92,17 +90,21 @@ Go back to your browser ([http://localhost:8080](http://localhost:8080)) and see
 Finally, see that Træfik load-balances between the two instances of your services by running the following command multiple times:
 
 ```shell
-curl -H Host:whoami.docker.localhost http://127.0.0.1?hostedononly
+curl -H Host:whoami.docker.localhost http://127.0.0.1
 ```
 
 The output will show alternatively one of the followings:
 
 ```yaml
-I'm hosted on ef194d07634a
+Hostname: 8656c8ddca6c
+IP: 172.27.0.3
+#...
 ```
 
 ```yaml
-I'm hosted on 6c3c5df0c79a
+Hostname: 8458f154e1f1
+IP: 172.27.0.4
+# ...
 ```
 
 ### 4 — Enjoy Træfik's Magic
