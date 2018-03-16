@@ -24,7 +24,7 @@ services:
 
 **That's it. Now you can launch Træfik!**
 
-In the `traefik-quickstart/traefik` folder, run the following command (that will deploy the container defined in our `docker-compose.yml` file):
+From the `traefik-quickstart/traefik` folder, run the following command (that will deploy the container defined in our `docker-compose.yml` file):
 
 ```shell
 docker-compose up -d
@@ -54,7 +54,7 @@ networks:
          name: traefik_default 
 ```
 
-In the `traefik-quickstart/services` folder, run the following command to deploy your new container:
+From the `traefik-quickstart/services` folder, run the following command to deploy your new container:
  
 ```shell
 docker-compose up -d
@@ -77,7 +77,7 @@ IP: 172.27.0.3
 
 ### 3 — Launch More Instances — Traefik Load Balances Them
 
-In the `traefik-quickstart/services` folder, run the following command to start more instances of your `whoami` services:
+From the `traefik-quickstart/services` folder, run the following command to start more instances of your `whoami` services:
  
 ```shell
 docker-compose up --scale whoami=2 -d
