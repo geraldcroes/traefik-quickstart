@@ -6,16 +6,15 @@ To save you some time, you can checkout the quickstart from the [containous/trae
 
 ### 1 — Launch Træfik — Tell It to Listen to Docker
 
-First, create the `traefik-quickstart/traefik` folder. In this folder, we will create a `docker-compose.yml` file where we will define a service `reverse-proxy` that uses the official Træfik image.
+First, create the `traefik-quickstart/traefik` folder. In this folder, we will create a `docker-compose.yml` file where we will define a service `reverse-proxy` that uses the official Træfik image:
 
-`traefik-quickstart/traefik/docker-compose.yml`: 
 ```yaml
 version: '3'
 
 services:
   reverse-proxy:
     image: traefik #The official Traefik docker image
-    command: --api --docker #enables the web UI and tells Træfik to listen to docker
+    command: --api --docker #Enables the web UI and tells Træfik to listen to docker
     ports:
       - "80:80"     #The HTTP port
       - "8080:8080" #The Web UI (enabled by --api)
@@ -25,10 +24,10 @@ services:
 
 **That's it. Now you can launch Træfik!**
 
-In the `traefik-quickstart` folder, run the following command (that asks docker to deploy the containers defined in our `traefik/docker-compose.yml` file):
+In the `traefik-quickstart/traefik` folder, run the following command (that will deploy the container defined in our `docker-compose.yml` file):
 
 ```shell
-docker-compose -f traefik/docker-compose.yml up -d
+docker-compose up -d
 ```
 
 If you'd like, you can open a browser and go to [http://localhost:8080](http://localhost:8080) to see Træfik's dashboard (we'll go back there once we'll have launched a service in step 2).
@@ -37,9 +36,8 @@ If you'd like, you can open a browser and go to [http://localhost:8080](http://l
 
 Now that we have a Træfik instance up and running, we will deploy new services. 
 
-Create the `traefik-quickstart/services/docker-compose.yml` file. There, we will define a new service (`whoami`) that is a simple webservice that outputs information about the machine where it is deployed (its IP adress, host, and so on):
+Create the `traefik-quickstart/services/docker-compose.yml` file. There, we will define a new service (`whoami`) that is a simple webservice that outputs information about the machine it is deployed on (its IP adress, host, and so on):
 
-`traefik-quickstart/services/docker-compose.yml`: 
 ```yaml
 version: '3'
 
@@ -56,10 +54,10 @@ networks:
          name: traefik_default 
 ```
 
-In the `traefik-quickstart` folder, run the following command to deploy your new container:
+In the `traefik-quickstart/services` folder, run the following command to deploy your new container:
  
 ```shell
-docker-compose -f services/docker-compose up -d
+docker-compose up -d
 ```
 
 Go back to your browser ([http://localhost:8080](http://localhost:8080)) and see that Træfik has automatically detected the new container and updated its own configuration.
@@ -79,10 +77,10 @@ IP: 172.27.0.3
 
 ### 3 — Launch More Instances — Traefik Load Balances Them
 
-In the `traefik-quickstart` folder, run the following command to start more instances of your `whoami` services:
+In the `traefik-quickstart/services` folder, run the following command to start more instances of your `whoami` services:
  
 ```shell
-docker-compose -f services/docker-compose.yml up --scale whoami=2 -d
+docker-compose up --scale whoami=2 -d
 ```
 
 Go back to your browser ([http://localhost:8080](http://localhost:8080)) and see that Træfik has automatically detected the new instance of the container.
